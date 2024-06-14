@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+.topnav {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  /* background-color: #ffffff; */
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #003687;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.active {
+  /* background-color: #04AA6D; */
+  color: #fff;
+}
+
+
+.fa {
+  color: #fff;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  color:#003687;
+  padding: 14px 16px;
+  background-color: inherit;
+  /* font-family: inherit; */
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  color:rgb(0, 54, 135);
+  min-width: 160px;
+  box-shadow: 8px 8px 19px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color:#003687;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+
+}
+
+
+  /* background: rgb(0,66,204);
+  background: linear-gradient(143deg, rgba(0,66,204,1) 0%, rgba(28,160,207,1) 100%, rgba(6,47,166,1) 100%);  */
+
+
+.topnav a:hover, .dropdown:hover .dropbtn {
+  /* background-color: #555; */
+  color: #93BEFF;
+
+}
+
+.dropdown-content a:hover {
+  background-color: #003687;
+  color: #93BEFF;
+
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+
+}
+
+
+@media screen and (max-width: 900px) {
+
+  .topnav a:not(:first-child), .dropdown .dropbtn {
+    display: none;
+     
+  }
+
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+
+  .topnav.responsive {
+    position: relative;
+  }
+
+  .topnav.responsive .icon {  
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .topnav.responsive .dropdown {float: none;}
+  .topnav.responsive .dropdown-content {position: relative;}
+  .topnav.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  background-image: url(svg/dns.svg);
+  background-repeat: no-repeat;
+  background: radial-gradient(circle, rgba(255,255,255,0) 11%, rgba(2,97,173,1) 100%);
+}
+.overlay-content a {
+  scale: 100%;
+}
+.overlay-content a:hover {
+  scale: 104%;
+}
+
+.overlay {
+  display: flex;
+  height: 0%;
+  width: 100%;
+  opacity: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background: rgb(0,66,204);
+  /* background: linear-gradient(143deg, rgba(0,66,204,1) 0%, rgba(28,160,207,1) 48%, rgba(19,115,159,1) 56%, rgba(6,47,166,1) 100%);  */
+  overflow-y: hidden;
+  transition: 0.4s;
+  background-size: 200% 200%;
+	animation: ani-gradient 15s ease infinite;
+	/* height: 100vh; */
+
+}
+
+
+/* @keyframes ani-gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+} */
+
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  margin-top: -80px;
+ 
+}
+
+.overlay a {
+
+  padding: 8px;
+  text-decoration: none;
+  font-size: 22px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover:not(.closebtn), 
+.overlay a:focus:not(.closebtn) {
+  color: #93BEFF;
+  box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.1);
+}
+a.closebtn:hover, 
+a.closebtn:focus {
+  margin: 3px;
+}
+
+.overlay .closebtn {
+  display: flex;
+  position: absolute;
+  /* margin: auto 0px; */
+  top: 24px;
+  right: 12px;
+  font-size: 38px;
+}
+
+a.closebtn:hover {
+  /* margin: auto 0px; */
+  color: red;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay {overflow-y: auto;}
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+
+.middle-text {
+  font-size: 18px;
+  color: white;
+  margin-top: 18px;
+  cursor: default;
+  /* position: relative; */
+
+}
+
+.middle-text:hover {
+  box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.1);
+  animation: mymove 5s infinite;
+}
+
+
+@keyframes mymove {
+  40% {box-shadow: 0px 10px 10px -10px  rgb(255, 255, 255);}
+}
+
+.bottom-text {
+  font-size: 14px;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  right: 25%;
+  width: 100%;
+  animation: moveFooter 0.8s linear 0.4s;
+  /* animation-iteration-count: 1; */
+}
+
+@keyframes moveFooter {
+
+  from{
+    transform:translateX(100%);
+  }
+  to{
+    transform:translateX(0%);
+  }
+}
+
+/* SVGs */
+
+
+.object {
+  width: 168px;
+  height: 168px;
+  position: relative;
+  top: 20%;
+  width: 100%;
+  padding-bottom: 8px;
+  filter: blur(1px);
+  transition: opacity 1s;
+  opacity: 0.184;
+  
+}
+
+.object2 {
+  width: 108px;
+  height: 108px;
+  position: relative;
+  right: -14%;
+  /* width: 100%; */
+  padding-top: 18px;
+  transition: opacity 1s;
+  opacity: 0.28;
+  transition: all 0.4s ease-in-out;
+  z-index: 8;
+  filter: invert(96%) sepia(100%) saturate(0%) hue-rotate(265deg) brightness(105%) contrast(101%);
+  animation: floatAnim 6s ease-in-out infinite;
+}
+
+.object3 {
+  width: 108px;
+  height: 100px;
+  position: relative;
+  top: 7%;
+  right: 12%;
+  width: 100%;
+  padding-bottom: 8px;
+  transition: opacity 1s;
+  opacity: 0.18;
+  transition: all 0.4s ease-in-out;
+  z-index: 10;
+  filter: invert(96%) sepia(100%) saturate(0%) hue-rotate(265deg) brightness(105%) contrast(101%);
+  animation: floatAnim 6s ease-in-out infinite;
+}
+
+.object4 {
+  width: 128px;
+  height: 80px;
+  /* position: absolute; */
+  top: 20%;
+  right: -18%;
+  width: 100%;
+  filter: invert(96%) sepia(100%) saturate(0%) hue-rotate(265deg) brightness(105%) contrast(101%);
+  opacity: 0.08;
+  transition: all 0.4s ease-in-out;
+  animation: floatAnim 6s ease-in-out infinite;
+
+}
+
+.object5 {
+  width: 188px;
+  height: 188px;
+  position: absolute;
+  top: 48%;
+  right: -23%;
+  overflow: visible;
+  filter: invert(96%) sepia(100%) saturate(0%) hue-rotate(265deg) brightness(105%) contrast(101%);
+  opacity: 0.48;
+  scale: 100%;
+  transition: all 0.4s ease-in-out;
+  animation: floatAnim 8s ease-in-out infinite;
+}
+.object2:hover,
+.object3:hover,
+.object4:hover,
+.object5:hover {
+ scale: 118%;
+
+}
+
+.object:hover {
+  filter: blur(0px);
+  opacity: 0.88;
+  animation-delay: 8s;
+  
+
+}
+
+
+@keyframes floatAnim {
+    0% {
+      transform: translate(1%,2%);
+    }
+    50% {
+      transform: translate(5%,6%);
+    }
+    100% {
+      transform: translate(1%,2%);
+    }
+  }
+
+
+.search-overlay-content {
+  position: absolute;
+  top: 4%;
+  left: 20%;
+  width: 60%;
+  text-align: center;
+  /* margin-top: 30px; */
+  /* margin: auto; */
+}
+
+input[type=text] {
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  float: left;
+  width: 70%;
+  background: rgba(5, 149, 238, 0.259);
+  border: 2px solid white;
+  border-radius: 8px;
+  scale: 100%;
+  transition: all 0.5s ease-in-out;
+  color: white;
+}
+
+input[type=text]:hover {
+  scale: 102%;
+  
+}
+
+button {
+  float: left;
+  width: 20%;
+  padding: 12px;
+  background: rgba(5, 149, 238, 0.259);
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+  border: 2px solid white;
+  scale: 100%;
+  margin-left: -10px;
+
+}
+
+button:hover {
+  background: #93BEFF;;
+  scale: 104%;
+}
+
+
+.button-container {
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  box-sizing: border-box;
+  margin-top: 10px;  
+  margin-bottom: 10px;  
+}
+
+
+.button-container a {
+  position: relative;
+  display: inline-block;
+  /* overflow: hidden;  neon ray tails */
+  font-size: 15px;
+}
+
+.button-container a:hover {
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 100px #93BEFF;
+  padding: 15px;
+}
+
+.button-container a span {
+  position: absolute;
+  display: block;
+}
+
+
+.button-container a span:nth-child(1) {
+  top: 0;
+  left: -100px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #93BEFF);
+  animation: btn-anim1 1.2s linear infinite;
+}
+
+.button-container a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #93BEFF);
+  animation: btn-anim2 1.2s linear infinite;
+  animation-delay: 0.25s;
+}
+.button-container a span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(270deg, transparent, #93BEFF);
+  animation: btn-anim3 1.2s linear infinite;
+  animation-delay: 0.5s;
+}
+
+.button-container a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #93BEFF);
+  animation: btn-anim4 1.2s linear infinite;
+  animation-delay: 0.75s;
+}
+
+
+@keyframes btn-anim1 {
+  0% {
+    left: -80%;
+  }
+
+  100% {
+    left: 80%;
+  }
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -80%;
+  }
+
+  100% {
+    top: 80%;
+  }
+}
+@keyframes btn-anim3 {
+  0% {
+    right: -80%;
+  }
+
+  100% {
+    right: 80%;
+  }
+}
+@keyframes btn-anim4 {
+  0% {
+    bottom: -80%;
+  }
+
+  100% {
+    bottom: 80%;
+  }
+}
+
+.svg-objects {
+  width: 188px;
+  height: 200px;
+} 
+
+</style>
+</head>
+<body>
+
+</style>
+</head>
+<body>
+
+
+
+<div class="topnav" id="myTopnav">
+  <a href="#home" class="active">Logo</a>
+  <a href="#news">About Us</a>
+  <a href="#contact">Products</a>
+  <a href="#contact">Personal</a>
+  <a href="#contact">Documents</a>
+  <a href="#contact">Contacts</a>
+  <!-- <div class="dropdown">
+    <button class="dropbtn">Dropdown
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Note 1</a>
+      <a href="#">Note 2 </a>
+      <a href="#">Note 3</a>
+    </div>
+  </div>  -->
+  <a href="javascript:void(0);" style="font-size:30px;" class="icon" onclick="openNav()">&#9776;</a>
+</div>
+
+<div id="myNav" class="overlay">
+  <div class="search-overlay-content">
+    <form action="action_page.php">
+      <input type="text" placeholder="Enter your query...." name="search">
+        <button type="submit">
+          <i class="fa fa-search"></i>
+        </button>
+    </form>
+  </div>
+  <img src="svg/dns.svg" class="object" alt="Logo"/>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+    <a href="#">About Us</a>
+    <a href="#">Products</a>
+    <a href="#">Personal</a>
+    <a href="#">Documents</a>
+    <a href="#">Contacts</a>
+    <div class="middle-text">
+      <p>Established in 2000!</p>
+    </div>
+
+    <div class="button-container">
+    <a href="#">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      Learn more!
+    </a>
+  </div>
+
+<div class="svg-objects">
+    <img src="svg/api-interface.svg" class="object2" alt="Logo2"/>
+    <img src="svg/dns.svg" class="object3" alt="Logo2"/>
+    <img src="svg/host-record.svg" class="object4" alt="Logo2"/>
+    <img src="svg/interface-control.svg" class="object5" alt="Logo2"/>
+  </div>
+
+    <div class="bottom-text">
+      <p>(с) 2024 Corporation X </p>
+    </div>
+  </div>
+</div>
+
+<script>
+
+
+function openNav() {
+  document.getElementById("myNav").style.height = "100%";
+  document.getElementById("myNav").style.opacity = "100%";
+}
+
+function closeNav() {
+  document.getElementById("myNav").style.height = "0%";
+  document.getElementById("myNav").style.opacity = "0%";
+}
+
+</script>
+
+</body>
+</html>
